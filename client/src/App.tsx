@@ -79,7 +79,7 @@ function App() {
       </div>
       <form onSubmit={(e) => e.preventDefault()} id="search-form">
         <div className="mt-5 mx-4 shadow-xl bg-white rounded-lg p-5">
-          <div className="grid grid-cols-2 mt-2 gap-6">
+          <div className="grid grid-cols-2 mt-2 gap-3">
             <MTextInput
               required={true}
               title={"Hae Ratkojat.fi:stä"}
@@ -89,7 +89,7 @@ function App() {
               onChange={onChangeSearch}
             />
           </div>
-          <div className="grid grid-cols-2 mt-2 gap-6">
+          <div className="grid lg:grid-cols-2 xs:grid-cols-1 mt-2 gap-3">
             <MTextInput
               title={"Tulosten pituus"}
               value={length}

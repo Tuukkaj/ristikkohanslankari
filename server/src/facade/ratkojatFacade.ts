@@ -50,10 +50,13 @@ function replaceNonSearchableCharacters(word: string) {
 }
 
 async function fetchResults(search: string) {
+  console.log("Searching word", search);
+
   try {
-    return await xray(`https://www.ratkojat.fi/hae?s=${search}&mode=2`, [
-      ".wi",
-    ]);
+    return await xray(
+      `https://www.ratkojat.fi/hae?s=${encodeURIComponent(search)}&mode=2`,
+      [".wi"]
+    );
   } catch (e) {
     console.error("Error occured during scraping");
     console.error(e);

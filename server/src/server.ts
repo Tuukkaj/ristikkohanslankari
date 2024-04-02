@@ -29,5 +29,5 @@ app.get(
 );
 
 app.listen(3000, () => {
-  console.log(`Example app listening on port ${3000}`);
+  console.log(`Ristikkohanslankari-server listening on port ${3000}`);
 });

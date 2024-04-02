@@ -4,9 +4,14 @@
 
 .tooltip {
   @apply invisible absolute;
+  max-width: 20em;
+  word-break: break-word;
 }
 
-.has-tooltip:hover,
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
 .has-tooltip:active .tooltip {
   @apply visible z-50;
 }

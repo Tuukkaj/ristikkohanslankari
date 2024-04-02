@@ -40,7 +40,8 @@ export interface WordDefinitionInterface {
 export async function getWordDefinition(
   word: string
 ): Promise<WordDefinitionInterface> {
-  const url = `${SERVER_URL}/word-definition?word=${word}`;
+  const strippedWord = word.match(/(\w+)/g)?.[0];
+  const url = `${SERVER_URL}/word-definition?word=${strippedWord}`;
 
   try {
     const res = await fetch(url);

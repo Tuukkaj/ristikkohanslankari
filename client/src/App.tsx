@@ -3,7 +3,7 @@ import MButton from "./components/MButton";
 import MTextInput from "./components/MTextInput";
 import { SearchWordResult, getWords } from "./api/requests";
 import MSpinner from "./components/MSpinner";
-import WordDefinition from "./components/WordDefinition";
+import WordDefinitionsBlock from "./components/WordDefinitionsBlock";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -53,13 +53,32 @@ function App() {
 
   return (
     <div>
-      <div className="grid-col-1 mt-10 mx-20">
+      <div className="grid-col-1 mt-10 mx-4">
         <div className="text-3xl font-bold text-gray-700">
-          ristikkohanslankari
+          ristikkohanslankari{" "}
+          <span className="has-tooltip">
+            <span className="tooltip rounded shadow-lg p-1 bg-gray-100 mt-10 text-base text-emerald-700">
+              Sivusto hankkii sanojen ratkaisut Ratkojat.fi:stä. Sanojen
+              määrittely haetaan kielitoimistonsanakirja.fi:stä.
+            </span>
+            <svg
+              className="h-8 w-8 inline"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />{" "}
+              <line x1="12" y1="16" x2="12" y2="12" />{" "}
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </span>
         </div>
       </div>
       <form onSubmit={(e) => e.preventDefault()} id="search-form">
-        <div className="mt-5 mx-20 shadow-xl bg-white rounded-lg p-5">
+        <div className="mt-5 mx-4 shadow-xl bg-white rounded-lg p-5">
           <div className="grid grid-cols-2 mt-2 gap-6">
             <MTextInput
               required={true}
@@ -92,27 +111,21 @@ function App() {
         </div>
       </form>
       {(results || isLoading) && (
-        <div className="mt-5 mx-20 shadow-xl bg-white rounded-lg p-5">
+        <div className="mt-5 mx-4 shadow-xl bg-white rounded-lg p-5">
           {!results && isLoading && <MSpinner />}
           {results && (
             <div>
-              {(length || regexp) && (
-                <>
-                  <p className="font-bold text-emerald-700">
-                    Siivilöidyt tulokset
-                  </p>
-                  <div>
-                    {results?.filteredResults.map((item) => (
-                      <span className="m-1">
-                        <WordDefinition item={item} />
-                      </span>
-                    ))}
-                  </div>
-                  <hr className="my-2"></hr>
-                </>
-              )}
+              <>
+                <p className="font-bold text-emerald-700">
+                  Siivilöidyt tulokset
+                </p>
+                <div>
+                  <WordDefinitionsBlock definitions={results.filteredResults} />
+                </div>
+                <hr className="my-2"></hr>
+              </>
               <p className="font-bold text-emerald-700">Kaikki tulokset</p>
-              {results?.results.join(", ")}
+              <WordDefinitionsBlock definitions={results.results} />
             </div>
           )}
         </div>

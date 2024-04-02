@@ -2,37 +2,37 @@ import MSpinner from "./MSpinner";
 import { WordDefinitionInterface, getWordDefinition } from "../api/requests";
 import { useRef, useState } from "react";
 
-async function defineWord(word: string) {
-  return await getWordDefinition(word);
-}
-
 export default function ({ item }: { item: string }) {
   const [definition, setDefinition] = useState<WordDefinitionInterface | null>(
     null
   );
   const thisElementRef = useRef<HTMLSpanElement>(null);
 
+  const defineWord = async () => {
+    setDefinition(await getWordDefinition(item));
+  };
+
   const onMouseEnter = async () => {
     console.log("Mouse enter " + item);
 
     setTimeout(async () => {
       if (thisElementRef?.current?.matches(":hover")) {
-        console.log("Defining word " + item);
-        const def = await defineWord(item);
-        console.log(item, def);
-        setDefinition(def);
+        await defineWord();
       }
     }, 400);
   };
 
-  const onMouseLeave = async () => {};
+  const onTouchStart = async () => {
+    console.log("Touch start " + item);
+    await defineWord();
+  };
 
   return (
     <span
       id={item}
       className="has-tooltip"
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onTouchStart={onTouchStart}
       ref={thisElementRef}
     >
       <span className="tooltip rounded shadow-lg p-1 bg-gray-100 -mt-20">

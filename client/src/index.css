@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 .tooltip {
-    @apply invisible absolute;
+  @apply invisible absolute;
 }
 
-.has-tooltip:hover .tooltip {
-    @apply visible z-50;
+.has-tooltip:hover,
+.has-tooltip:active .tooltip {
+  @apply visible z-50;
 }

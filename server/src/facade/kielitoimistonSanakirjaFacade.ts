@@ -12,11 +12,13 @@ export async function searchWordDefinition(word: string) {
   );
 
   const scraped = await page.evaluate(() => {
+    // @ts-ignore Ran inside puppeteer
     const wordTitles = [...document.querySelectorAll(".dict-entry-header")].map(
       (item) => item.textContent?.match(/\D+/) // Capture all non digits from the start
     );
 
     const wordDefinitions = [
+      // @ts-ignore Ran inside puppeteer
       ...document.querySelectorAll(".sense-container-grid"),
     ].map((item) => item.textContent?.replaceAll("Näytä kaikki esimerkit", "")); // Remove all non defining words
 
@@ -26,7 +28,7 @@ export async function searchWordDefinition(word: string) {
         definition: wordDefinitions[index],
       };
     });
-
+    // @ts-ignore Ran inside puppeteer
     const suggestions = [...document.querySelectorAll(".suggestion-text")].map(
       (item) => item.textContent
     );

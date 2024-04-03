@@ -1,6 +1,9 @@
 import puppeteer from "puppeteer";
 
-const browser = await puppeteer.launch({});
+const browser = await puppeteer.launch({
+  executablePath: "/usr/bin/google-chrome",
+  args: ["--no-sandbox"],
+});
 export async function newPage() {
   return browser.newPage();
 }

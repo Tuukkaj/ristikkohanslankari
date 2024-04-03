@@ -28,6 +28,7 @@ This app uses webscraping as a datasource:
 - Proper Dockerized local development
 - Proper management of env variables
 - Prevent tooltip texts from going offscreen properly
+- Proper parsing of kielitoimistonsanakirja.fi word definitions. Currently the definition is parsed as one string so it could be parsed to sections and displayed bit better.
 - Test but who needs those
 
 ## Development
